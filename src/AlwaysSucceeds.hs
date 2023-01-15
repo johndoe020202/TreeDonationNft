@@ -56,5 +56,5 @@ module AlwaysSucceeds where
  alwaysSucceedsAddress :: Plutus.V1.Ledger.Api.Address
  alwaysSucceedsAddress = Address (ScriptCredential alwaysSucceedsValHash) Nothing               
 
- alwaysSucceedsSerialized :: PlutusScript PlutusScriptV1
+ alwaysSucceedsSerialized :: PlutusScript PlutusScriptV2
  alwaysSucceedsSerialized = PlutusScriptSerialised . BSS.toShort . BSL.toStrict . serialise $ alwaysSucceeds 
