@@ -31,8 +31,9 @@ common warnings
 library
 
     exposed-modules:  
-      Contracts.AlwaysSucceeds,
-      Contracts.AlwaysFails,
+      Contracts.Samples.AlwaysSucceeds,
+      Contracts.Samples.AlwaysFails,
+      Contracts.Validators.MintingValidator,
       Utils.Helpers,
       Utils.OnChain,
       Utils.WriteToFiles
@@ -68,8 +69,9 @@ executable TreeDonationNft
      Main.hs
 
     other-modules:
-      Contracts.AlwaysSucceeds,
-      Contracts.AlwaysFails,
+      Contracts.Samples.AlwaysSucceeds,
+      Contracts.Samples.AlwaysFails,
+      Contracts.Validators.MintingValidator,
       Utils.Helpers,
       Utils.OnChain,
       Utils.WriteToFiles

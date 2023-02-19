@@ -11,4 +11,4 @@ module Main where
    in info (parseOpts <**> helper) . mconcat $ [fullDesc, progDesc "Create a forward minting policy for NFTs"]
 
  main :: IO ()
- main = execParser opts >>= writeAlwaysFailsPlutusFile
+ main = execParser opts >>= writeMintingValidatorPlutusFile

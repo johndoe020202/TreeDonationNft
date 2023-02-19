@@ -1,24 +1,8 @@
 {-# LANGUAGE DataKinds           #-}
---{-# LANGUAGE DeriveAnyClass      #-}
---{-# LANGUAGE DeriveGeneric       #-}
---{-# LANGUAGE FlexibleContexts    #-}
 {-# LANGUAGE NoImplicitPrelude   #-}
---{-# LANGUAGE NumericUnderscores  #-}
---{-# LANGUAGE OverloadedStrings   #-}
---{-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE TemplateHaskell     #-}
---{-# LANGUAGE TypeApplications    #-}
---{-# LANGUAGE TypeFamilies        #-}
---{-# LANGUAGE TypeOperators       #-}
---{-# LANGUAGE BangPatterns        #-}
---{-# LANGUAGE CPP                 #-}
---{-# LANGUAGE LambdaCase          #-}
---{-# LANGUAGE NamedFieldPuns      #-}
---{-# LANGUAGE RankNTypes          #-}
---{-# LANGUAGE RecordWildCards     #-}
---{-# LANGUAGE DerivingStrategies  #-}
 
-module Contracts.AlwaysSucceeds where
+module Contracts.Samples.AlwaysSucceeds where
 
  import Codec.Serialise (serialise)
  import qualified Data.ByteString.Lazy as BSL
@@ -26,20 +10,16 @@ module Contracts.AlwaysSucceeds where
  import qualified PlutusTx
  import PlutusTx.Prelude
  import qualified Plutus.V1.Ledger.Scripts as Scripts
- import Plutus.V2.Ledger.Api ( Credential(..) )
+ import Plutus.V2.Ledger.Api (Credential(..) )
  import Cardano.Api
  import Plutus.V1.Ledger.Api (Address(..))
  import Cardano.Api.Shelley (PlutusScript(..))
  
  import Utils.Helpers (validatorHash)
 
-
-
  {-# INLINABLE mkAlwaysSuccedsValidator #-}
  mkAlwaysSuccedsValidator :: BuiltinData -> BuiltinData -> BuiltinData -> ()
  mkAlwaysSuccedsValidator _ _ _ = ()
-
-
 
  alwaysSucceeds :: Scripts.Validator
  alwaysSucceeds = Scripts.mkValidatorScript $$(PlutusTx.compile [||mkAlwaysSuccedsValidator||])

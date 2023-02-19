@@ -2,16 +2,17 @@
 {-# LANGUAGE NoImplicitPrelude   #-}
 {-# LANGUAGE TemplateHaskell     #-}
 
-module Contracts.AlwaysFails where
+module Contracts.Samples.AlwaysFails where
+
  import Codec.Serialise (serialise)
  import qualified Data.ByteString.Lazy as BSL
  import qualified Data.ByteString.Short as BSS
- import qualified PlutusTx
+ import PlutusTx
  import PlutusTx.Prelude
- import qualified Plutus.V1.Ledger.Scripts as Scripts
+ import Plutus.V1.Ledger.Api (Address(..))
+ import Plutus.V1.Ledger.Scripts as Scripts
  import Plutus.V2.Ledger.Api ( Credential(..) )
  import Cardano.Api
- import Plutus.V1.Ledger.Api (Address(..))
  import Cardano.Api.Shelley (PlutusScript(..))
  
  import Utils.Helpers (validatorHash)
