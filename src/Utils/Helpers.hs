@@ -4,7 +4,7 @@
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 
-module Shared (wrap, validatorHash) where
+module Utils.Helpers (wrap, validatorHash) where
 
 import qualified Cardano.Api.Shelley as Shelley
 import Codec.Serialise (serialise)
@@ -37,17 +37,7 @@ validatorHash :: Scripts.Validator -> Scripts.ValidatorHash
 validatorHash = Scripts.ValidatorHash . Scripts.getScriptHash . scriptHash . Scripts.getValidator
 
 scriptHash :: Scripts.Script -> Scripts.ScriptHash
-scriptHash =
-  Scripts.ScriptHash
-    . toBuiltin
-    . Shelley.serialiseToRawBytes
-    . Shelley.hashScript
-    . toCardanoApiScript
+scriptHash =  Scripts.ScriptHash . toBuiltin . Shelley.serialiseToRawBytes . Shelley.hashScript . toCardanoApiScript
 
 toCardanoApiScript :: Scripts.Script -> Shelley.Script Shelley.PlutusScriptV2
-toCardanoApiScript =
-  Shelley.PlutusScript Shelley.PlutusScriptV2
-    . Shelley.PlutusScriptSerialised
-    . BSShort.toShort
-    . BSLazy.toStrict
-    . serialise
+toCardanoApiScript = Shelley.PlutusScript Shelley.PlutusScriptV2 . Shelley.PlutusScriptSerialised . BSShort.toShort . BSLazy.toStrict . serialise

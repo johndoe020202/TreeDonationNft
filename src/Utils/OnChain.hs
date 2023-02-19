@@ -1,15 +1,12 @@
-{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 
-module OnChainUtils where
- 
- import qualified Plutus.V2.Ledger.Api as PlutusV2 
+module Utils.OnChain where
+
+ import qualified Plutus.V2.Ledger.Api as PlutusV2
  import Plutus.V2.Ledger.Contexts (TxInfo, TxOut, findDatum)
- import Plutus.V1.Ledger.Tx (txOutDatum)
  import qualified PlutusTx
  import PlutusTx.IsData.Class (UnsafeFromData)
  import PlutusTx.Prelude
- import qualified PlutusTx.AssocMap as Map
 
  --- Thanks MuesliSwap
  {-# INLINEABLE mustFindScriptDatum #-}
