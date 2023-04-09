@@ -33,7 +33,7 @@ module Contracts.Policies.MintingPolicy where
 
     checkMintedAmount = case flattenValue (txInfoMint info) of
         [(_, _, amt')] -> _ == tn && amt' == 1
-        _                -> False
+        _              -> False
 
  mkTokenPolicyWrapped :: TxOutRef -> BuiltinData -> ScriptContext -> Bool
  mkTokenPolicyWrapped oref rdmr ctx = mkTokenPolicy oref (unsafeToBuiltinData rdmr) ctx 

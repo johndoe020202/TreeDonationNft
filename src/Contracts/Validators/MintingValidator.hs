@@ -21,7 +21,7 @@ module Contracts.Validators.MintingValidator where
 
 
  data MintingDatum = MintingDatum
-    { donator :: PubKeyHash
+    { donor :: PubKeyHash
     , amount  :: Integer
     } deriving Show 
 
@@ -29,18 +29,20 @@ module Contracts.Validators.MintingValidator where
  
  {-# INLINABLE mkMintingValidator #-}
  mkMintingValidator :: MintingDatum -> () -> ScriptContext -> Bool
- mkMintingValidator datum () ctx = traceIfFalse "donator's signature missing" signedByDonator &&
-                                   traceIfFalse "wrong amount sent" checkIfCorrectDonatedAmount 
+ mkMintingValidator datum () ctx = traceIfFalse "donor's signature missing" signedBydonor &&
+                                   traceIfFalse "wrong amount sent, minimum must be 20 ADA" checkIfCorrectDonatedAmount 
   where
     info :: TxInfo
     info = scriptContextTxInfo ctx
 
-    signedByDonator :: Bool
-    signedByDonator = txSignedBy info $ donator datum
+    signedByDonor :: Bool
+    signedByDonor = txSignedBy info $ donor datum
 
-    -- TODO, must check if datum passed amount is actually present in the transaction
+    txInPayments :: [Value]
+    txInPayments = map txOutValue $ txInfoInputs info
+    
     checkIfCorrectDonatedAmount :: Bool
-    checkIfCorrectDonatedAmount = True
+    checkIfCorrectDonatedAmount = (txInPayments >= [Ada.lovelaceValueOf 20])
 
 
  mintingValidatorWrapped :: BuiltinData -> BuiltinData -> BuiltinData -> ()
